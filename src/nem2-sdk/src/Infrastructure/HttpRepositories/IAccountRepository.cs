@@ -40,21 +40,21 @@ namespace io.nem2.sdk.Infrastructure.HttpRepositories
         /// Gets the account information.
         /// </summary>
         /// <param name="account">The account.</param>
-        /// <returns>IObservable&lt;AccountInfoDTO&gt;.</returns>
+        /// <returns>IObservable&lt;AccountInfo&gt;.</returns>
         IObservable<AccountInfo> GetAccountInfo(PublicAccount account);
 
         /// <summary>
         /// Get account information.
         /// </summary>
         /// <param name="accountIds">The account ids for which account information should be returned.</param>
-        /// <returns>An IObservable of a List of AccountInfoDTO</returns>
+        /// <returns>An IObservable of a List of AccountInfo</returns>
         IObservable<List<AccountInfo>> GetAccountsInfo(List<PublicAccount> accountIds);
 
         /// <summary>
         /// Get account information.
         /// </summary>
         /// <param name="accountIds">The account ids for which account information should be returned.</param>
-        /// <returns>An IObservable of a List of AccountInfoDTO</returns>
+        /// <returns>An IObservable of a List of AccountInfo</returns>
         IObservable<List<AccountInfo>> GetAccountsInfo(List<Address> accountIds);
 
         /// <summary>
