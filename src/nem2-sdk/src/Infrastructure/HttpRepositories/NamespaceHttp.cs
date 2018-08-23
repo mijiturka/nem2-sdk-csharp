@@ -80,7 +80,7 @@ namespace io.nem2.sdk.Infrastructure.HttpRepositories
         /// Gets the namespace.
         /// </summary>
         /// <param name="namespaceId">The namespace identifier.</param>
-        /// <returns>IObservable&lt;NamespaceInfoDTO&gt;.</returns>
+        /// <returns>IObservable&lt;NamespaceInfo&gt;.</returns>
         /// <exception cref="ArgumentException">Value cannot be null or empty. - namespaceId
         /// or
         /// Invalid namespace</exception>
@@ -118,7 +118,7 @@ namespace io.nem2.sdk.Infrastructure.HttpRepositories
         /// Gets the namespaces from account.
         /// </summary>
         /// <param name="account">The account.</param>
-        /// <returns>IObservable&lt;List&lt;NamespaceInfoDTO&gt;&gt;.</returns>
+        /// <returns>IObservable&lt;List&lt;NamespaceInfo&gt;&gt;.</returns>
         /// <exception cref="ArgumentNullException">account</exception>
         public IObservable<List<NamespaceInfo>> GetNamespacesFromAccount(PublicAccount account)
         {
@@ -131,7 +131,7 @@ namespace io.nem2.sdk.Infrastructure.HttpRepositories
         /// Gets the namespaces from account.
         /// </summary>
         /// <param name="account">The account.</param>
-        /// <returns>IObservable&lt;List&lt;NamespaceInfoDTO&gt;&gt;.</returns>
+        /// <returns>IObservable&lt;List&lt;NamespaceInfo&gt;&gt;.</returns>
         /// <exception cref="ArgumentNullException">account</exception>
         public IObservable<List<NamespaceInfo>> GetNamespacesFromAccount(Address account)
         {
@@ -145,7 +145,7 @@ namespace io.nem2.sdk.Infrastructure.HttpRepositories
         /// </summary>
         /// <param name="account">The account.</param>
         /// <param name="query">The query.</param>
-        /// <returns>IObservable&lt;List&lt;NamespaceInfoDTO&gt;&gt;.</returns>
+        /// <returns>IObservable&lt;List&lt;NamespaceInfo&gt;&gt;.</returns>
         /// <exception cref="ArgumentNullException">account
         /// or
         /// query</exception>
@@ -177,7 +177,7 @@ namespace io.nem2.sdk.Infrastructure.HttpRepositories
         /// </summary>
         /// <param name="account">The account.</param>
         /// <param name="query">The query.</param>
-        /// <returns>IObservable&lt;List&lt;NamespaceInfoDTO&gt;&gt;.</returns>
+        /// <returns>IObservable&lt;List&lt;NamespaceInfo&gt;&gt;.</returns>
         /// <exception cref="ArgumentNullException">account
         /// or
         /// query</exception>
@@ -208,7 +208,7 @@ namespace io.nem2.sdk.Infrastructure.HttpRepositories
         /// Gets the namespaces from accounts.
         /// </summary>
         /// <param name="accounts">The accounts.</param>
-        /// <returns>IObservable&lt;List&lt;NamespaceInfoDTO&gt;&gt;.</returns>
+        /// <returns>IObservable&lt;List&lt;NamespaceInfo&gt;&gt;.</returns>
         /// <exception cref="ArgumentNullException">accounts</exception>
         /// <exception cref="ArgumentException">Value cannot be an empty collection. - accounts</exception>
         public IObservable<List<NamespaceInfo>> GetNamespacesFromAccounts(List<PublicAccount> accounts)
@@ -223,7 +223,7 @@ namespace io.nem2.sdk.Infrastructure.HttpRepositories
         /// Gets the namespaces from accounts.
         /// </summary>
         /// <param name="accounts">The accounts.</param>
-        /// <returns>IObservable&lt;List&lt;NamespaceInfoDTO&gt;&gt;.</returns>
+        /// <returns>IObservable&lt;List&lt;NamespaceInfo&gt;&gt;.</returns>
         /// <exception cref="ArgumentNullException">accounts</exception>
         /// <exception cref="ArgumentException">Value cannot be an empty collection. - accounts</exception>
         public IObservable<List<NamespaceInfo>> GetNamespacesFromAccounts(List<Address> accounts)
@@ -239,7 +239,7 @@ namespace io.nem2.sdk.Infrastructure.HttpRepositories
         /// </summary>
         /// <param name="publicKeys">The accounts.</param>
         /// <param name="query">The query.</param>
-        /// <returns>IObservable&lt;List&lt;NamespaceInfoDTO&gt;&gt;.</returns>
+        /// <returns>IObservable&lt;List&lt;NamespaceInfo&gt;&gt;.</returns>
         /// <exception cref="ArgumentNullException">accounts
         /// or
         /// query</exception>
@@ -277,7 +277,7 @@ namespace io.nem2.sdk.Infrastructure.HttpRepositories
         /// </summary>
         /// <param name="addresses">The addresses</param>
         /// <param name="query">The query.</param>
-        /// <returns>IObservable&lt;List&lt;NamespaceInfoDTO&gt;&gt;.</returns>
+        /// <returns>IObservable&lt;List&lt;NamespaceInfo&gt;&gt;.</returns>
         /// <exception cref="ArgumentNullException">accounts
         /// or
         /// query</exception>
@@ -314,21 +314,20 @@ namespace io.nem2.sdk.Infrastructure.HttpRepositories
         /// Gets the namespaces names.
         /// </summary>
         /// <param name="namespaceIds">The namespace ids.</param>
-        /// <returns>IObservable&lt;List&lt;NamespaceNameDTO&gt;&gt;.</returns>
+        /// <returns>IObservable&lt;List&lt;NamespaceId&gt;&gt;.</returns>
         /// <exception cref="ArgumentNullException">namespaceIds</exception>
         /// <exception cref="ArgumentException">Value cannot be an empty collection. - namespaceIds
         /// or
         /// Collection contains invalid id.</exception>
         public IObservable<List<NamespaceId>> GetNamespacesNames(List<NamespaceId> namespaceIds)
         {
-
             if (namespaceIds == null) throw new ArgumentNullException(nameof(namespaceIds));
             if (namespaceIds.Count == 0) throw new ArgumentException("Value cannot be an empty collection.", nameof(namespaceIds));
             if(namespaceIds.Any(e => e.HexId.Length != 16 || !Regex.IsMatch(e.HexId, @"\A\b[0-9a-fA-F]+\b\Z"))) throw new ArgumentException("Collection contains invalid id.");
 
             return Observable.FromAsync(async ar => await NamespaceRoutesApi.GetNamespacesNamesAsync(JObject.FromObject(new
                 {
-                    addresses = namespaceIds.Select(i => i.HexId)
+                    namespaceIds = namespaceIds.Select(i => i.HexId)
                 }))).Select(i => i.Select(e => new NamespaceId(e["name"].ToString())).ToList());
         }
 
