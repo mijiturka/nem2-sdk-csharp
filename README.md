@@ -7,7 +7,7 @@
 
 See [!here](https://docs.microsoft.com/en-us/dotnet/standard/net-standard) for platform compatibility
 
-## Instillation 
+## Installation
 
 > Install-Package io.nem2.sdk
 

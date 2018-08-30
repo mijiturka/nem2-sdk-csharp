@@ -77,7 +77,7 @@ namespace io.nem2.sdk.Infrastructure.HttpRepositories
         /// Gets the account information.
         /// </summary>
         /// <param name="address">The account.</param>
-        /// <returns>IObservable&lt;AccountInfoDTO&gt;.</returns>
+        /// <returns>IObservable&lt;AccountInfo&gt;.</returns>
         /// <exception cref="ArgumentNullException">account</exception>
         public IObservable<AccountInfo> GetAccountInfo(Address address)
         {
@@ -98,7 +98,7 @@ namespace io.nem2.sdk.Infrastructure.HttpRepositories
         /// Gets the account information.
         /// </summary>
         /// <param name="account">The account.</param>
-        /// <returns>IObservable&lt;AccountInfoDTO&gt;.</returns>
+        /// <returns>IObservable&lt;AccountInfo&gt;.</returns>
         /// <exception cref="ArgumentNullException">account</exception>
         public IObservable<AccountInfo> GetAccountInfo(PublicAccount account)
         {
@@ -119,7 +119,7 @@ namespace io.nem2.sdk.Infrastructure.HttpRepositories
         /// Get account information.
         /// </summary>
         /// <param name="addresses">The account ids for which account information should be returned.</param>
-        /// <returns>An IObservable of a List of AccountInfoDTO</returns>
+        /// <returns>An IObservable of a List of AccountInfo</returns>
         /// <exception cref="ArgumentNullException">accountIds</exception>
         public IObservable<List<AccountInfo>> GetAccountsInfo(List<Address> addresses)
         {
@@ -146,7 +146,7 @@ namespace io.nem2.sdk.Infrastructure.HttpRepositories
         /// Get account information.
         /// </summary>
         /// <param name="publicAccounts">The account ids for which account information should be returned.</param>
-        /// <returns>An IObservable of a List of AccountInfoDTO</returns>
+        /// <returns>An IObservable of a List of AccountInfo</returns>
         /// <exception cref="ArgumentNullException">accountIds</exception>
         public IObservable<List<AccountInfo>> GetAccountsInfo(List<PublicAccount> publicAccounts)
         {
