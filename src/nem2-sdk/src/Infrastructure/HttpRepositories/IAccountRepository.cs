@@ -61,14 +61,14 @@ namespace io.nem2.sdk.Infrastructure.HttpRepositories
         /// Get multisig account information.
         /// </summary>
         /// <param name="account">The account for which multisig info should be returned.</param>
-        /// <returns>An IObservable of type MultisigEntryDTO.</returns>
+        /// <returns>An IObservable of type MultisigAccountInfo.</returns>
         IObservable<MultisigAccountInfo> GetMultisigAccountInfo(PublicAccount account);
 
         /// <summary>
         /// Get multisig graph information
         /// </summary>
         /// <param name="account">The account for which multisig graph information should be returned.</param>
-        /// <returns>An IObservable list of MultisigAccountGraphInfoDTO</returns>
+        /// <returns>An IObservable list of MultisigAccountGraphInfo</returns>
         IObservable<MultisigAccountGraphInfo> GetMultisigAccountGraphInfo(PublicAccount account);
 
         /// <summary>
